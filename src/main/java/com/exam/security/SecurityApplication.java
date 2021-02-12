@@ -23,38 +23,22 @@ public class SecurityApplication {
     }
 
 
-    //Pour encoder les mdp !! puis on lencode dans le service
     @Bean
-    PasswordEncoder passwordEncoder(){
-
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    CommandLineRunner start(IService iService){
+    CommandLineRunner start(IService iService) {
         return args -> {
             iService.addRole(new AppRole(null, "USER"));
             iService.addRole(new AppRole(null, "ADMIN"));
-            iService.addRole(new AppRole(null, "CUSTOMER_MANAGER"));
-            iService.addRole(new AppRole(null, "PRODUCT_MANAGER"));
-            iService.addRole(new AppRole(null, "BILL_MANAGER"));
 
-            iService.addUser(new AppUser(null, "usr1", "1234", new ArrayList<>()));
-            iService.addUser(new AppUser(null, "Admin", "1234", new ArrayList<>()));
-            iService.addUser(new AppUser(null, "usr2", "1234", new ArrayList<>()));
-            iService.addUser(new AppUser(null, "usr3", "1234", new ArrayList<>()));
-            iService.addUser(new AppUser(null, "usr4", "1234", new ArrayList<>()));
+            iService.addUser(new AppUser(null, "Armane", "armane", new ArrayList<>()));
+            iService.addUser(new AppUser(null, "guest", "123", new ArrayList<>()));
 
-
-            iService.addRoleToUser("usr1", "USER");
-            iService.addRoleToUser("usr2", "USER");
-            iService.addRoleToUser("usr2", "CUSTOMER_MANAGER");
-            iService.addRoleToUser("usr3", "USER");
-            iService.addRoleToUser("usr3", "PRODUCT_MANAGER");
-            iService.addRoleToUser("usr4", "USER");
-            iService.addRoleToUser("usr4", "BILL_MANAGER");
-            iService.addRoleToUser("Admin", "USER");
-            iService.addRoleToUser("Admin", "ADMIN");
+            iService.addRoleToUser("Armane", "ADMIN");
+            iService.addRoleToUser("guest", "USER");
         };
     }
 }
